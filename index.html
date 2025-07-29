@@ -13,7 +13,7 @@
       }
       .sidebar {
         width: 220px;
-        background: #2c3e50;
+        background: #0064c9;
         color: #fff;
         transition: width 0.3s;
         /* overflow: hidden; */
@@ -27,12 +27,12 @@
         top: 50%;
         right: -20px;
         transform: translateY(-50%);
-        background: #34495e;
+        background: #0059b3;
         color: #fff;
         border: none;
         border-radius: 50%;
-        width: 32px;
-        height: 32px;
+        width: 50px;
+        height: 50px;
         cursor: pointer;
         font-size: 18px;
         z-index: 10;
@@ -71,21 +71,36 @@
     <div class="sidebar" id="sidebar">
       <button class="toggle-btn" id="toggleBtn">&#9776;</button>
       <ul>
-        <li>Life of St. Ignatius</li>
-        <li>Alay kay Ignacio</li>
-        <li>Walking in the Footsteps of St. Ignatius</li>
-        <li>Novena Reflection for Ignatius Month</li>
+        <li data-src="life-of-st-ignatius.html">Life of St. Ignatius</li>
+        <li data-src="alay-kay-ignacio.html">Alay kay Ignacio</li>
+        <li data-src="iggyquiz.html">
+          Walking in the Footsteps of St. Ignatius
+        </li>
+        <li data-src="novena.html">Novena Reflection for Ignatius Month</li>
       </ul>
     </div>
     <div class="main-content">
       <h1>Welcome to the Feast of St. Ignatius</h1>
-      <p>Main content goes here.</p>
+      <iframe
+        id="main-iframe"
+        src="welcome.html"
+        style="width: 100%; height: 80vh; border: none"
+      ></iframe>
     </div>
     <script>
       const sidebar = document.getElementById("sidebar");
       const toggleBtn = document.getElementById("toggleBtn");
       toggleBtn.addEventListener("click", () => {
         sidebar.classList.toggle("collapsed");
+      });
+      const iframe = document.getElementById("main-iframe");
+      document.querySelectorAll(".sidebar ul li").forEach((li) => {
+        li.addEventListener("click", function () {
+          const src = this.getAttribute("data-src");
+          if (src && iframe) {
+            iframe.src = src;
+          }
+        });
       });
     </script>
   </body>
