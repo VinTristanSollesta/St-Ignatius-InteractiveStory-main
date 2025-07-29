@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Feast of St. Ignatius</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        display: flex;
+        height: 100vh;
+      }
+      .sidebar {
+        width: 220px;
+        background: #2c3e50;
+        color: #fff;
+        transition: width 0.3s;
+        /* overflow: hidden; */
+        position: relative;
+      }
+      .sidebar.collapsed {
+        width: 0px;
+      }
+      .sidebar .toggle-btn {
+        position: absolute;
+        top: 50%;
+        right: -20px;
+        transform: translateY(-50%);
+        background: #34495e;
+        color: #fff;
+        border: none;
+        border-radius: 50%;
+        width: 32px;
+        height: 32px;
+        cursor: pointer;
+        font-size: 18px;
+        z-index: 10;
+        transition: right 0.3s;
+      }
+      .sidebar.collapsed .toggle-btn {
+        right: -16px; /* Keep button visible when sidebar is collapsed */
+      }
+      .sidebar ul {
+        list-style: none;
+        padding: 0;
+        margin: 60px 0 0 0;
+      }
+      .sidebar ul li {
+        padding: 32px 36px;
+        white-space: wrap;
+      }
+      .sidebar.collapsed ul li {
+        padding: 16px 10px;
+        text-align: center;
+      }
+      .sidebar ul li:hover {
+        background: #34495e;
+        cursor: pointer;
+      }
+      .main-content {
+        flex: 1;
+        padding: 32px;
+        background: #f4f4f4;
+        transition: margin-left 0.3s;
+        z-index: 3;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="sidebar" id="sidebar">
+      <button class="toggle-btn" id="toggleBtn">&#9776;</button>
+      <ul>
+        <li>Life of St. Ignatius</li>
+        <li>Alay kay Ignacio</li>
+        <li>Walking in the Footsteps of St. Ignatius</li>
+        <li>Novena Reflection for Ignatius Month</li>
+      </ul>
+    </div>
+    <div class="main-content">
+      <h1>Welcome to the Feast of St. Ignatius</h1>
+      <p>Main content goes here.</p>
+    </div>
+    <script>
+      const sidebar = document.getElementById("sidebar");
+      const toggleBtn = document.getElementById("toggleBtn");
+      toggleBtn.addEventListener("click", () => {
+        sidebar.classList.toggle("collapsed");
+      });
+    </script>
+  </body>
+</html>
