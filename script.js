@@ -33,7 +33,7 @@ const scenes = [
     title: "Rome",
     subtitle: "Mission and Foundation",
     text: "Ignatius and his companions offered themselves to the Pope. In 1540, the Society of Jesus was formally approved, beginning a new chapter of mission, education, and service.",
-    background: "images/rome.png",
+    background: "images/lastorta.png",
   },
   {
     title: "The Final Chapter of St. Ignatius' Life",

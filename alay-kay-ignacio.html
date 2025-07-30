@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Alay kay Ignacio Gallery</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        background: #f4f4f4;
+      }
+      .gallery {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 16px;
+        padding: 24px;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+      .gallery img {
+        width: 100%;
+        height: 180px;
+        object-fit: cover;
+        border-radius: 10px;
+        cursor: pointer;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        transition: transform 0.2s;
+      }
+      .gallery img:hover {
+        transform: scale(1.04);
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+      }
+      .modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100vw;
+        height: 100vh;
+        overflow: auto;
+        background: rgba(0, 0, 0, 0.85);
+        align-items: center;
+        justify-content: center;
+      }
+      .modal-content {
+        max-width: 90vw;
+        max-height: 90vh;
+        margin: auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        background: none;
+        gap: 24px;
+      }
+      .modal-content img {
+        max-width: 60vw;
+        max-height: 80vh;
+        border-radius: 12px;
+        box-shadow: 0 4px 32px rgba(0, 0, 0, 0.4);
+        background: #fff;
+      }
+      .modal-desc {
+        background: #fff;
+        color: #222;
+        border-radius: 10px;
+        padding: 24px 20px;
+        min-width: 180px;
+        max-width: 300px;
+        min-height: 120px;
+        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+        font-size: 1.1rem;
+        margin-left: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        word-break: break-word;
+      }
+      .close {
+        position: absolute;
+        top: 12px;
+        right: 24px;
+        color: #fff;
+        font-size: 2.5rem;
+        font-weight: bold;
+        cursor: pointer;
+        z-index: 10;
+        text-shadow: 0 2px 8px #000;
+        background: none;
+        border: none;
+      }
+      @media (max-width: 600px) {
+        .gallery {
+          grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+          padding: 8px;
+        }
+        .gallery img {
+          height: 90px;
+        }
+        .modal-content img {
+          max-width: 98vw;
+          max-height: 60vh;
+        }
+      }
+      @media (max-width: 900px) {
+        .modal-content {
+          flex-direction: column;
+          gap: 12px;
+        }
+        .modal-content img {
+          max-width: 90vw;
+          max-height: 50vh;
+        }
+        .modal-desc {
+          max-width: 95vw;
+          min-width: 0;
+          padding: 16px 8px;
+          min-height: 60px;
+          margin-left: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="gallery" id="gallery"></div>
+    <div id="modal" class="modal">
+      <div class="modal-content">
+        <button class="close" id="closeModal">&times;</button>
+        <img id="modalImg" src="" alt="Enlarged" />
+        <div id="modalDesc" class="modal-desc"></div>
+      </div>
+    </div>
+    <script>
+      const galleryData = [
+        {
+          src: "images/gallery1.jpg",
+          alt: "Gallery 1",
+          title: "Image",
+          desc: "Description for Gallery 1",
+        },
+        {
+          src: "images/gallery2.jpg",
+          alt: "Gallery 2",
+          title: "Image",
+          desc: "Description for Gallery 2",
+        },
+        {
+          src: "images/gallery3.jpg",
+          alt: "Gallery 3",
+          title: "Image",
+          desc: "Description for Gallery 3",
+        },
+        {
+          src: "images/gallery4.jpg",
+          alt: "Gallery 4",
+          title: "Image",
+          desc: "Description for Gallery 4",
+        },
+        {
+          src: "images/gallery5.jpg",
+          alt: "Gallery 5",
+          title: "Image",
+          desc: "Description for Gallery 5",
+        },
+        {
+          src: "images/gallery6.jpg",
+          alt: "Gallery 6",
+          title: "Image",
+          desc: "Description for Gallery 6",
+        },
+      ];
+
+      const gallery = document.getElementById("gallery");
+      galleryData.forEach((item, idx) => {
+        const img = document.createElement("img");
+        img.src = item.src;
+        img.alt = item.alt;
+        img.dataset.idx = idx;
+        img.style.cursor = "pointer";
+        gallery.appendChild(img);
+      });
+
+      // Modal logic
+      const modal = document.getElementById("modal");
+      const modalImg = document.getElementById("modalImg");
+      const modalDesc = document.getElementById("modalDesc");
+      const closeModal = document.getElementById("closeModal");
+
+      gallery.addEventListener("click", function (e) {
+        if (e.target.tagName === "IMG") {
+          const idx = e.target.dataset.idx;
+          const item = galleryData[idx];
+          modal.style.display = "flex";
+          modalImg.src = item.src;
+          modalImg.alt = item.alt;
+          modalDesc.textContent = item.desc;
+        }
+      });
+
+      closeModal.onclick = function () {
+        modal.style.display = "none";
+        modalImg.src = "";
+        modalDesc.textContent = "";
+      };
+      modal.onclick = function (e) {
+        if (e.target === modal) {
+          modal.style.display = "none";
+          modalImg.src = "";
+          modalDesc.textContent = "";
+        }
+      };
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") {
+          modal.style.display = "none";
+          modalImg.src = "";
+          modalDesc.textContent = "";
+        }
+      });
+    </script>
+  </body>
+</html>

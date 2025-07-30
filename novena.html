@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Novena Reflection for Ignatius Month</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        background: #f4f4f4;
+      }
+      .gallery {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 16px;
+        padding: 24px;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+      .gallery img {
+        width: 100%;
+        height: 180px;
+        object-fit: cover;
+        border-radius: 10px;
+        cursor: pointer;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        transition: transform 0.2s;
+      }
+      .gallery img:hover {
+        transform: scale(1.04);
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+      }
+      .modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100vw;
+        height: 100vh;
+        overflow: auto;
+        background: rgba(0, 0, 0, 0.85);
+        align-items: center;
+        justify-content: center;
+      }
+      .modal-content {
+        max-width: 90vw;
+        max-height: 90vh;
+        margin: auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        background: none;
+        gap: 24px;
+      }
+      .modal-content img {
+        max-width: 60vw;
+        max-height: 80vh;
+        border-radius: 12px;
+        box-shadow: 0 4px 32px rgba(0, 0, 0, 0.4);
+        background: #fff;
+      }
+      .close {
+        position: absolute;
+        top: 12px;
+        right: 24px;
+        color: #fff;
+        font-size: 2.5rem;
+        font-weight: bold;
+        cursor: pointer;
+        z-index: 10;
+        text-shadow: 0 2px 8px #000;
+        background: none;
+        border: none;
+      }
+      @media (max-width: 600px) {
+        .gallery {
+          grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+          padding: 8px;
+        }
+        .gallery img {
+          height: 90px;
+        }
+        .modal-content img {
+          max-width: 98vw;
+          max-height: 60vh;
+        }
+      }
+      @media (max-width: 900px) {
+        .modal-content {
+          flex-direction: column;
+          gap: 12px;
+        }
+        .modal-content img {
+          max-width: 90vw;
+          max-height: 50vh;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="gallery" id="gallery"></div>
+    <div id="modal" class="modal">
+      <div class="modal-content">
+        <button class="close" id="closeModal">&times;</button>
+        <img id="modalImg" src="" alt="Enlarged" />
+      </div>
+    </div>
+    <script>
+      const galleryData = [
+        {
+          src: "novena/1.jpg",
+          alt: "Gallery 1",
+          title: "Image",
+        },
+        {
+          src: "novena/2.jpg",
+          alt: "Gallery 2",
+          title: "Image",
+        },
+        {
+          src: "novena/3.jpg",
+          alt: "Gallery 3",
+          title: "Image",
+        },
+        {
+          src: "novena/4.jpg",
+          alt: "Gallery 4",
+          title: "Image",
+        },
+        {
+          src: "novena/5.jpg",
+          alt: "Gallery 5",
+          title: "Image",
+        },
+        {
+          src: "novena/6.jpg",
+          alt: "Gallery 6",
+          title: "Image",
+        },
+        {
+          src: "novena/7.jpg",
+          alt: "Gallery 7",
+          title: "Image",
+        },
+        {
+          src: "novena/8.jpg",
+          alt: "Gallery 8",
+          title: "Image",
+        },
+        {
+          src: "novena/9.jpg",
+          alt: "Gallery 9",
+          title: "Image",
+        },
+        {
+          src: "novena/10.jpg",
+          alt: "Gallery 10",
+          title: "Image",
+        },
+        {
+          src: "novena/11.jpg",
+          alt: "Gallery 11",
+          title: "Image",
+        },
+        {
+          src: "novena/12.jpg",
+          alt: "Gallery 12",
+          title: "Image",
+        },
+        {
+          src: "novena/13.jpg",
+          alt: "Gallery 13",
+          title: "Image",
+        },
+        {
+          src: "novena/14.jpg",
+          alt: "Gallery 14",
+          title: "Image",
+        },
+        {
+          src: "novena/15.jpg",
+          alt: "Gallery 15",
+          title: "Image",
+        },
+        {
+          src: "novena/16.jpg",
+          alt: "Gallery 16",
+          title: "Image",
+        },
+      ];
+
+      const gallery = document.getElementById("gallery");
+      galleryData.forEach((item, idx) => {
+        const img = document.createElement("img");
+        img.src = item.src;
+        img.alt = item.alt;
+        img.dataset.idx = idx;
+        img.style.cursor = "pointer";
+        gallery.appendChild(img);
+      });
+
+      // Modal logic
+      const modal = document.getElementById("modal");
+      const modalImg = document.getElementById("modalImg");
+      const closeModal = document.getElementById("closeModal");
+
+      gallery.addEventListener("click", function (e) {
+        if (e.target.tagName === "IMG") {
+          const idx = e.target.dataset.idx;
+          const item = galleryData[idx];
+          modal.style.display = "flex";
+          modalImg.src = item.src;
+          modalImg.alt = item.alt;
+        }
+      });
+
+      closeModal.onclick = function () {
+        modal.style.display = "none";
+        modalImg.src = "";
+      };
+      modal.onclick = function (e) {
+        if (e.target === modal) {
+          modal.style.display = "none";
+          modalImg.src = "";
+        }
+      };
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") {
+          modal.style.display = "none";
+          modalImg.src = "";
+        }
+      });
+    </script>
+  </body>
+</html>
