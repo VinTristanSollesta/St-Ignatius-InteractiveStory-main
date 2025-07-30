@@ -219,6 +219,10 @@ const overlay = document.getElementById("overlay");
 const nextBtn = document.getElementById("next-button");
 const quizSection = document.getElementById("quiz-section");
 const sceneImage = document.getElementById("scene-image");
+const factSection = document.getElementById("fact-section")
+const factBtn = document.getElementById("fact-img");
+const factEl = document.getElementById("fact-text");
+
 
 function startAdventure() {
     document.getElementById("start-screen").classList.add("hidden");
@@ -248,6 +252,11 @@ function showScene() {
     textEl.textContent = scene.text;
     quizSection.innerHTML = "";
     nextBtn.classList.add("hidden");
+
+    factSection.classList.remove("hidden");
+    factBtn.classList.remove("hidden");
+
+    factBtn.onclick = showFact;
 
     const hasTrivia = trivia.hasOwnProperty(scene.title);
     if (hasTrivia) {
@@ -296,4 +305,17 @@ function nextScene() {
         currentScene = 0;
     }
     showScene();
+}
+
+function showFact() {
+    if (factEl.classList.contains("hidden")) {
+        factEl.classList.remove("hidden");
+
+        setTimeout(() => {
+            factEl.classList.add("hidden");
+        },5000)
+
+    } else {
+        factEl.classList.add("hidden");
+    }
 }
