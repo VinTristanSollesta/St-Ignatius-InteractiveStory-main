@@ -60,7 +60,7 @@
       }
       .main-content {
         flex: 1;
-        padding: 32px;
+        padding: 10px;
         background: #f4f4f4;
         transition: margin-left 0.3s;
         z-index: 3;
@@ -94,11 +94,15 @@
         sidebar.classList.toggle("collapsed");
       });
       const iframe = document.getElementById("main-iframe");
+      const mainTitle = document.querySelector(".main-content h1");
       document.querySelectorAll(".sidebar ul li").forEach((li) => {
         li.addEventListener("click", function () {
           const src = this.getAttribute("data-src");
           if (src && iframe) {
             iframe.src = src;
+          }
+          if (mainTitle) {
+            mainTitle.textContent = this.textContent.trim();
           }
         });
       });
